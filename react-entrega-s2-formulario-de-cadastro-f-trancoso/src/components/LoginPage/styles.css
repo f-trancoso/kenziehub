@@ -1,0 +1,76 @@
+main {
+    max-width: 600px;
+    box-sizing: border-box;
+    width: 90%;
+    background-color: #212529;
+    border-radius: 5px;
+    padding: 0px 20px;
+    padding-bottom: 20px;
+}
+
+main h2 {
+    color:white;
+}
+
+form {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 30px;
+    align-items: flex-start;
+}
+
+form label {
+    display: block;
+    color: white;
+}
+
+form input, form select {
+    box-sizing: border-box;
+    margin: 10px 0px;
+    border: none;
+    padding: none !important; 
+    background-color: #343B41;
+}
+
+input[type="text" i], input[type="password" i] {
+    padding: 5px;
+}
+
+form input, button,form select {
+    width: 100%;
+    height: 42px;
+    border-radius: 4px;
+    border: none;
+}
+
+form input:focus,form select:focus {
+    outline: 2px solid #FF577F;
+}
+
+form button {
+    background-color: #FF577F;
+    color: white;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.registerButton {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #868E96;
+    color: #F8F9FA;
+}
+
+label {
+    padding-left: 5px;
+}
+
+p, label {
+    font-size: 14px;
+}
+
+p {
+    color: #868E96;
+}
