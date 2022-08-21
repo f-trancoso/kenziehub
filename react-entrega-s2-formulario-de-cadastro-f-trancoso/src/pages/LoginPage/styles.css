@@ -1,4 +1,4 @@
-main {
+.mainDisplay {
     max-width: 600px;
     box-sizing: border-box;
     width: 90%;
@@ -8,7 +8,7 @@ main {
     padding-bottom: 20px;
 }
 
-main h2 {
+.mainDisplay h2 {
     color:white;
 }
 
@@ -73,4 +73,8 @@ p, label {
 
 p {
     color: #868E96;
+}
+
+.userWelcome {
+    color: white;
 }

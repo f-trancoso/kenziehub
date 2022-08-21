@@ -1,10 +1,14 @@
 import './styles.css'
-import { GlobalButton } from '../GlobalButton/styles'
+import { GlobalButton } from '../../components/GlobalButton/styles'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import { useContext } from 'react'
+import { UserContext } from '../../contexts/UserContext'
 
 const LoginPage = ({changePage}) => {
+
+    const { setCurrentUser } = useContext(UserContext)
 
     let navigate = useNavigate()
 
@@ -16,15 +20,16 @@ const LoginPage = ({changePage}) => {
             .then(response => {
                 console.log(response.data)
                 localStorage.setItem('currentUser', JSON.stringify(response.data))
+                setCurrentUser(response.data.user)
             })
             .catch(err => console.error(err))
 
-        //navigate('/')
+        navigate('/')
     }
 
     return(
         <>
-            <main>
+            <div className='mainDisplay'>
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit(logIn)}>
 
@@ -39,7 +44,7 @@ const LoginPage = ({changePage}) => {
                 </form>
                 <p>Ainda não possui uma conta?</p>
                 <GlobalButton className='registerButton' onClick={() => navigate('/register')}>Cadastre-se</GlobalButton>
-            </main>
+            </div>
         </>
         
     )

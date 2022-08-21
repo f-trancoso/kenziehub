@@ -11,6 +11,15 @@ export const GlobalButton = styled.button`
     color: white;
     font-size: 13px;
     background-color: ${props => `#${props['myColor']}`};
+
+    transition: 300ms;
+
+    opacity: 88%;
+
+    &:hover {
+        opacity: 100%;
+        cursor: pointer;      
+    }
 `
 //width: ${ props => `${props['myWidth']}`};
 

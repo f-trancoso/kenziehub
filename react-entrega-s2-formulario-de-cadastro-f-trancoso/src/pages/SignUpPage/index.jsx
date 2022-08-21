@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { GlobalButton } from "../GlobalButton/styles"
+import { GlobalButton } from "../../components/GlobalButton/styles"
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 
