@@ -1,25 +1,26 @@
 import { GlobalButton } from '../../components/GlobalButton/styles'
 import {MdOutlinePlaylistAdd} from 'react-icons/md'
-import { useContext, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 import { ListItem } from '../../components/ListItem/ListItem'
 import './styles.css'
 import Modal from 'react-modal'
 import axios from 'axios'
+import { ITech } from '../../contexts/UserContext'
 
 export const HomePage = () => {
 
-    const [newTechTitle, setNewTechTitle] = useState()
-    const [newTechStatus, setNewTechStatus] = useState()
+    const [newTechTitle, setNewTechTitle] = useState('')
+    const [newTechStatus, setNewTechStatus] = useState('')
     const [modal, setModal] = useState(false)
 
     const { currentUser, validateUser } = useContext(UserContext)
 
     const createNewTech = async () => {
 
-        const currentToken = JSON.parse(localStorage.getItem('currentUser'))['token']
+        const currentToken = JSON.parse(localStorage.getItem('currentUser') as any)['token']
 
-        const createdTech = await axios.post(
+        const createdTech = await axios.post<ITech>(
             'https://kenziehub.herokuapp.com/users/techs',
             {
                 'title': newTechTitle,
@@ -34,7 +35,7 @@ export const HomePage = () => {
         }
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
         createNewTech()
@@ -105,7 +106,7 @@ export const HomePage = () => {
 
                 </div>
                 <ul>
-                    {currentUser?.techs.map((elem) => {
+                    {currentUser?.techs?.map((elem) => {
                         return <ListItem title={elem['title']} status={elem['status']} key={elem['id']}/>
                     })}
                 </ul>

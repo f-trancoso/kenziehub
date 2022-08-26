@@ -19,13 +19,34 @@ const SignUpPage = () => {
         course_module: Yup.string().required('Módulo obrigatório'),
     })
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm<IRegisterUser>({
         resolver: yupResolver(formSchema)
     })
 
-    const registerUser = (data) => {
+    interface IRegisterUser{
+        email:string,
+        password: string,
+        name: string,
+        bio: string,
+        contact: number | string,
+        course_module: string,
+    }
+
+    interface IRegisterUserResponse {
+        id: string,
+        name: string, 
+        email: string,
+        course_module: string,
+        bio: string,
+        contact: string,
+        created_at: string,
+        updated_at: string,
+        avatar_url: string
+    }
+
+    const registerUser = (data: IRegisterUser) => {
         console.log(data)
-        axios.post('https://kenziehub.herokuapp.com/users', data)
+        axios.post<IRegisterUserResponse>('https://kenziehub.herokuapp.com/users', data)
             .then(response => console.log(response.data))
             .catch(err => console.error(err))
     }
@@ -70,7 +91,7 @@ const SignUpPage = () => {
                     <option value="Quarto módulo (Backend Avançado)">Módulo IV</option>
                 </select> 
 
-                <GlobalButton colorHex={'FF577F'} width={'100%'} type="submit">Cadastrar</GlobalButton>
+                <GlobalButton myColor={'FF577F'} width={'100%'} type="submit">Cadastrar</GlobalButton>
             </form>
             <p>Já esta cadastrado?</p>
             <GlobalButton myWidth={'100%'} className='registerButton' onClick={() => navigate(`/login`)}>Fazer Login</GlobalButton>

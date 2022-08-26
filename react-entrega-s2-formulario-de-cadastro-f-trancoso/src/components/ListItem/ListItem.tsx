@@ -2,17 +2,17 @@ import axios from 'axios'
 import { RiDeleteBin5Fill } from 'react-icons/ri'
 import { StyledListItem } from './styles'
 import { useContext } from 'react'
-import { UserContext } from '../../contexts/UserContext'
+import { ITech, UserContext } from '../../contexts/UserContext'
 
-export const ListItem = ({title, status}) => {
+export const ListItem = ({title, status}: ITech) => {
 
     const { currentUser, validateUser } = useContext(UserContext)
 
-    const deleteTech = (tech) => {
+    const deleteTech = (tech: string) => {
 
-        const currentToken = JSON.parse(localStorage.getItem('currentUser'))['token']
+        const currentToken = JSON.parse(localStorage.getItem('currentUser') as string)['token']
 
-        currentUser.techs.forEach((elem) => {
+        currentUser.techs.forEach((elem: ITech) => {
             if (elem.title === tech){
                 axios.delete(`https://kenziehub.herokuapp.com/users/techs/${elem.id}`, {headers: {'Authorization': `Bearer ${currentToken}`}})  
                     .then(() => {

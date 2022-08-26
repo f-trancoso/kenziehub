@@ -5,20 +5,25 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { useContext } from 'react'
 import { UserContext } from '../../contexts/UserContext'
+import { IUserState } from '../../contexts/UserContext'
 
-const LoginPage = ({changePage}) => {
+const LoginPage = () => {
 
     const { setCurrentUser } = useContext(UserContext)
 
     let navigate = useNavigate()
 
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit } = useForm<ILoginRequisition>()
 
-    const logIn = (data) => {
-        console.log(data)
-        axios.post('https://kenziehub.herokuapp.com/sessions', data)
+    interface ILoginRequisition {
+        email: string, 
+        password: string
+    }
+    
+
+    const logIn = (logInData: ILoginRequisition):void => {
+        axios.post<IUserState>('https://kenziehub.herokuapp.com/sessions', logInData)
             .then(response => {
-                console.log(response.data)
                 localStorage.setItem('currentUser', JSON.stringify(response.data))
                 setCurrentUser(response.data.user)
             })
@@ -39,7 +44,7 @@ const LoginPage = ({changePage}) => {
                     <label htmlFor="senha">Senha</label>
                     <input id='senha' type="password" {...register('password')}/>
 
-                    <GlobalButton colorHex={'FF577F'} width={'100%'} type='submit'>Entrar</GlobalButton>
+                    <GlobalButton myColor={'FF577F'} width={'100%'} type='submit'>Entrar</GlobalButton>
 
                 </form>
                 <p>Ainda não possui uma conta?</p>
