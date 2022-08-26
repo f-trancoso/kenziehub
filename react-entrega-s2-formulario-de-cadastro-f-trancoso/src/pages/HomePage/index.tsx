@@ -1,6 +1,6 @@
 import { GlobalButton } from '../../components/GlobalButton/styles'
 import {MdOutlinePlaylistAdd} from 'react-icons/md'
-import { FormEvent, useContext, useState } from 'react'
+import { FormEvent, useContext, useState, useEffect } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 import { ListItem } from '../../components/ListItem/ListItem'
 import './styles.css'
@@ -16,9 +16,14 @@ export const HomePage = () => {
 
     const { currentUser, validateUser } = useContext(UserContext)
 
+    useEffect(() => {
+        validateUser()
+            .catch(err => console.error(err))
+    })
+
     const createNewTech = async () => {
 
-        const currentToken = JSON.parse(localStorage.getItem('currentUser') as any)['token']
+        const currentToken = JSON.parse(localStorage.getItem('currentUser') as string)['token']
 
         const createdTech = await axios.post<ITech>(
             'https://kenziehub.herokuapp.com/users/techs',

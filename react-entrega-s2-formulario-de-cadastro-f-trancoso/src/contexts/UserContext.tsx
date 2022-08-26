@@ -48,11 +48,9 @@ export const UserProvider = ({children}: IUserProviderProps) => {
 
         const currentToken = JSON.parse(localStorage.getItem('currentUser') as string)['token']
         
-        const userProfile = await axios.get<IUserState>('https://kenziehub.herokuapp.com/profile', {headers: {'Authorization': `Bearer ${currentToken}`}})
+        const userProfile = await axios.get<IUser>('https://kenziehub.herokuapp.com/profile', {headers: {'Authorization': `Bearer ${currentToken}`}})
 
-        console.log(userProfile.data)
-
-        setCurrentUser(userProfile.data.user as IUser)
+        setCurrentUser(userProfile.data as IUser)
     }
 
   return (

@@ -26,10 +26,9 @@ const LoginPage = () => {
             .then(response => {
                 localStorage.setItem('currentUser', JSON.stringify(response.data))
                 setCurrentUser(response.data.user)
+                navigate('/')
             })
             .catch(err => console.error(err))
-
-        navigate('/')
     }
 
     return(
